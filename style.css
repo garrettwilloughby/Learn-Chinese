@@ -1,0 +1,83 @@
+*{
+    padding: 0;     /*removing all default padding */
+    margin: 0;
+    box-sizing: border-box;
+}
+
+#title{
+    font-size: 10px;
+    
+}
+
+.nav{
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+
+.container{
+    height: 70vh; /* vh is viewport */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: solid 1px black; /* remove later */
+    
+}
+
+.flashcard{
+    position: absolute;
+    perspective: 800px; /* Perspective for 3D transforms */
+}
+
+
+
+.front{
+
+    width: 50vh;
+    height: 29vh;
+    display: flex; /* gives us freedom to flex within a grid (super nice! */
+    border: solid 1px black;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    
+
+    transform: rotateY(0deg); /* Initial state, facing front */
+    transition: transform 0.6s;
+    backface-visibility: hidden; /* Hide the backface of the card */
+
+}
+
+
+.back{
+
+
+    width: 50vh;
+    height: 29vh;
+    display: flex; /* gives us freedom to flex within a grid (super nice! */
+    border: solid 1px black;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+
+    transform: rotateY(180deg); /* Initial state, facing back */
+    transition: transform 0.6s;
+    backface-visibility: hidden; /* Hide the backface of the card */
+
+  
+
+}
+
+
+.card.flip .front {
+    transform: rotateY(180deg); /* Rotate to show the back */
+  }
+  
+.card.flip .back {
+    transform: rotateY(0deg); /* Rotate to show the front */
+}
+
+.hidden{
+    display: none;
+}
