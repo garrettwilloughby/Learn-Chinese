@@ -28,35 +28,32 @@
 .flashcard{
     position: absolute;
     perspective: 800px; /* Perspective for 3D transforms */
+    width: 50vh;
+    height: 29vh;
+    border: solid 1px black;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
 }
-
 
 
 .front{
-
-    width: 50vh;
-    height: 29vh;
-    display: flex; /* gives us freedom to flex within a grid (super nice! */
-    border: solid 1px black;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
     display: block;
 }
-
-
 .back{
+    display: none;
+}
 
-
-    width: 50vh;
-    height: 29vh;
-    display: flex; /* gives us freedom to flex within a grid (super nice! */
-    border: solid 1px black;
-    text-align: center;
+.input{
+    display: flex;
     align-items: center;
     justify-content: center;
-    display: none;
+    border: solid 1px black; /* remove later */
+    height: 20vh;
+    justify-content: space-between;
+}
 
-  
-
+.new{
+    align-items: center;
+    margin-right: 70%;
 }

@@ -1,11 +1,9 @@
-const front = document.querySelectorAll('.front');
-const back = document.querySelectorAll('.back');
+const front = document.querySelectorAll('.front')[0]; //need indexes because style for querySelectorAll is a list
+const back = document.querySelectorAll('.back')[0];
 const flips = document.querySelectorAll('.flip');
 
 
-
 const flip = () => {
-  for (let i = 0; i < front.length; i++) {
     if (front.style.display !== "none") {
       front.style.display = "none";
       back.style.display = "block";
@@ -14,8 +12,3 @@ const flip = () => {
       back.style.display = "none";
     }
   }
-}
-
-flips.addEventListener('click', flip());
-
-console.log('bye');

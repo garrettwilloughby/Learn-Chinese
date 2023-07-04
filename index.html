@@ -20,19 +20,33 @@
     </header>
     
 
-    <div class=" container">  
-        <div class = "flashcard">
+    <div class= "container">  
+        <div class = "flashcard" onclick = "flip()">
+
             <div class = "front">
                 <p>front</p>
             </div>
 
             <div class = "back">
-                <p>back</p>
+                <p">back</p>
             </div>
+
         </div>
     </div>
 
-    <button onclick = "flip()" class = "flip">flip</button>
+    <div class = "input">
+        <div class = "new">
+            <label for="term">English</label>
+            <input type="text">
+            <br>
+            <Label for = "term">Chinese</Label>
+            <input type="text">
+            <br>
+            <button type>Add New Term</button>
+        </div>
+    </div>
+
+
 
     <script src = "script.js"></script>
 </body>
