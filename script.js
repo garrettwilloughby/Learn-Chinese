@@ -1,6 +1,10 @@
 const front = document.querySelectorAll('.front')[0]; //need indexes because style for querySelectorAll is a list
 const back = document.querySelectorAll('.back')[0];
 const flips = document.querySelectorAll('.flip');
+const chinese = document.querySelectorAll('.chinese');
+const english = document.querySelectorAll('.english');
+
+
 
 
 const flip = () => {
@@ -11,4 +15,26 @@ const flip = () => {
       front.style.display = "block";
       back.style.display = "none";
     }
+  }
+
+  words = {
+    Hello: "Ni hao",
+    Watermelon: "Xigua"
+    
+  }
+
+  data = Object.entries(words);
+  
+  const getRandomTerm = () => {
+    let randomTerm = data[Math.floor(Math.random() * data.length)]
+    front.innerHTML = `<p>${randomTerm[0]}</p>`; //note the use of literals
+    back.innerHTML =  `<p>${randomTerm[1]}</p>`; //replaces content that lives in p with a random term.
+  }
+
+  const nextTerm = () => {
+    getRandomTerm();
+  }
+
+  const addTerm = () => {
+    words[english] = chinese
   }

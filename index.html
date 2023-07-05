@@ -6,7 +6,7 @@
     <title>學習中文!!</title>
     <link rel="stylesheet" href="style.css" type = "text/css">
 </head>
-<body class = "body">
+<body class = "body" onload = "getRandomTerm()">
     
     
 
@@ -24,11 +24,11 @@
         <div class = "flashcard" onclick = "flip()">
 
             <div class = "front">
-                <p>front</p>
+                <p></p>
             </div>
 
             <div class = "back">
-                <p">back</p>
+                <p"></p>
             </div>
 
         </div>
@@ -37,12 +37,13 @@
     <div class = "input">
         <div class = "new">
             <label for="term">English</label>
-            <input type="text">
+            <input type="text" class = "english">
             <br>
             <Label for = "term">Chinese</Label>
-            <input type="text">
+            <input type="text" class = "chinese">
             <br>
-            <button type>Add New Term</button>
+            <button onclick = "addTerm()">Add New Term</button>
+            <button onclick = "nextTerm()">Next Term</button>
         </div>
     </div>
 
