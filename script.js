@@ -9,20 +9,27 @@ const db = new sqlite3.Database('./data.db', sqlite3.OPEN_READWRITE, (err) =>{
 })
 
 //create table
-//sql = 'CREATE TABLE terms(id INTEGER PRIMARY KEY, ENGLISH, CHINESE)';
-//db.run(sql);
+const create = () => {
+sql = 'CREATE TABLE terms(id INTEGER PRIMARY KEY, ENGLISH, CHINESE)';
+db.run(sql);
+}
 
 //drop table
-//db.run("DROP TABLE terms");
-
+const drop = () => {
+db.run("DROP TABLE terms");
+}
 
 //Insert data
-// sql = 'INSERT INTO terms(ENGLISH, CHINESE) VALUES (?, ?)';
-//   db.run(sql, ["Hello", "Ni Hao"], (err) => {
-//     if (err) return console.error(err.message);
-//   })
+const insert = (english, chinese) =>{
+sql = 'INSERT INTO terms(ENGLISH, CHINESE) VALUES (?, ?)';
+  db.run(sql, [english, chinese], (err) => {
+    if (err) return console.error(err.message);
+  })
+}
 
-//Query data
+
+//Query Data
+const query = () => {
 sql = 'SELECT * FROM terms';
 db.all(sql, [], (err, rows) => {
   if (err) return console.error(err.message);
@@ -30,24 +37,27 @@ db.all(sql, [], (err, rows) => {
     console.log(row);
   });
 });
+}
+
 
 //delete data
+
+const deleted = (id) => {
 sql = 'DELETE FROM terms WHERE id = ?';
-db.run(sql, [], (err) => {
+db.run(sql, [id], (err) => {
   if (err) return console.error(err.message);
 });
+}
 
 
 
 //update data
+const update = () => {
 sql = 'UPDATE terms SET ENGLISH = ? CHINESE = ? WHERE id = ?';
-db.run(sql, [], (err) => {
+db.run(sql, [english, chinese, id], (err) => {
   if (err) return console.error(err.message);
 });
-
-
-
-//turn these into functions
+}
 
 
 
