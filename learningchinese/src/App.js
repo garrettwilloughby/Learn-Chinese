@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import Flashcardlist from './Flashcardlist';
 
 const App = () =>{
-  const [flashcards, setFlashcards] = useState(cards())
+  const [flashcards, setFlashcards] = useState(getCard())
   return (
     
 <body className='body'>
@@ -47,7 +47,7 @@ const App = () =>{
 }
 
 
-const cards = () => {
+const getCard = () => {
   const testFlashcards = [
     {
       id: 1,
