@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import Flashcardlist from './Flashcardlist';
 
 const App = () =>{
-  const [flashcards, setFlashcards] = useState(testFlashcards)
+  const [flashcards, setFlashcards] = useState(cards())
   return (
     
 <body className='body'>
@@ -17,7 +17,7 @@ const App = () =>{
       <button>Test</button>
     </div>
 
-    
+
 </header>
 
 
@@ -46,27 +46,18 @@ const App = () =>{
   );
 }
 
-const testFlashcards = [
-  {
-    id: 1,
-    english: "Hello",
-    chinese: "Ni hao"
-  },
 
-  {
-    id: 2,
-    english: "Watermelon",
-    chinese: "Xigua"
-  },
+const cards = () => {
+  const testFlashcards = [
+    {
+      id: 1,
+      english: "Hello",
+      chinese: "Ni hao"
+    },
+  ];
 
-  {
-    id: 3,
-    english: "Tea",
-    chinese: "Cha"
-  }
-
-
-]
+  return testFlashcards;
+}
 
 
 
