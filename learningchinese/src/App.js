@@ -1,6 +1,7 @@
 import './App.css';
 import React, { useState } from 'react'
 import Flashcardlist from './Flashcardlist';
+import LocalStorage from './Localstorage';
 
 const App = () =>{
   const [flashcards, setFlashcards] = useState(getCard())
@@ -23,22 +24,14 @@ const App = () =>{
 
 <div className= "container">  
 
-      <div className = "flashcard" onclick = "flip()">
+      <div className = "flashcard">
           <Flashcardlist flashcards = {flashcards}/>
       </div>
+
+      <button onclick = "nextTerm()">Next Term</button>
       
   </div>
 
-  <div className = "input">
-        <div className = "new">
-            <label for="term">English</label>
-            <input type="text" id = "english" class = "english"></input>
-            <label for = "term">Chinese</label>
-            <input type="text" id = "chinese" class = "chinese"></input>
-            <button onclick = "addTerm()">Add New Term</button>
-            <button onclick = "nextTerm()">Next Term</button>
-      </div>
-  </div>
 
 
 
@@ -47,16 +40,19 @@ const App = () =>{
 }
 
 
+
 const getCard = () => {
+  const existingFlashcards = JSON.parse(localStorage.getItem('flashcards')) || [];
   const testFlashcards = [
     {
       id: 1,
       english: "Hello",
       chinese: "Ni hao"
     },
+
   ];
 
-  return testFlashcards;
+  return existingFlashcards;
 }
 
 
