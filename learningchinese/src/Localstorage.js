@@ -29,6 +29,26 @@ function LocalStorage() {
     const clearCards = () =>{
         localStorage.clear();
     }
+
+    const undo = () => {
+        const existingFlashcards = JSON.parse(localStorage.getItem('flashcards')) || [];
+        existingFlashcards.pop();
+        localStorage.setItem('flashcards', JSON.stringify(existingFlashcards));
+    }
+
+    const deleteCard = () =>{
+        const existingFlashcards = JSON.parse(localStorage.getItem('flashcards')) || [];
+        const selectedCard = {
+            english: englishInput,
+            chinese: chineseInput,
+          };
+
+        delete existingFlashcards[selectedCard];
+        localStorage.setItem('flashcards', JSON.stringify(existingFlashcards));
+
+        setEnglishInput('');
+        setChineseInput('');
+    }
     
 
 
@@ -40,11 +60,23 @@ function LocalStorage() {
             <label for = "term">Chinese</label>
             <input type="text" id = "chinese" class = "chinese" value = {chineseInput} onChange={(e) => setChineseInput(e.target.value)}></input>
             <button onClick = {addTerm} >Add New Term</button>
+
+            <div className="delete">
+            <button onClick = {deleteCard} >Delete Term</button>
+            </div>
+
         </div>
 
         <div className="clear">
         <button onClick = {clearCards} >Clear Cards</button>
         </div>
+
+        <div className="undo">
+        <button onClick = {undo} >Undo</button>
+        </div>
+
+        
+
     </div>
 
    

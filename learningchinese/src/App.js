@@ -1,59 +1,32 @@
 import './App.css';
 import React, { useState } from 'react'
-import Flashcardlist from './Flashcardlist';
-import LocalStorage from './Localstorage';
+import Home from './Home';
+
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
 
 const App = () =>{
-  const [flashcards, setFlashcards] = useState(getCard())
   return (
-    
-<body className='body'>
-  
+<Router>
+
+{/*content outside switch always shows!*/}
+
 {/*all jsx elements must have a parent element*/}
-  <header className='nav'>
-    <h1 class = "title">學習中文!!</h1>
-    <div>
-      <button>Flashcards</button>
-      <button>Draw</button>
-      <button>Test</button>
-    </div>
 
+  <Routes>
+    <Route path = "/">
+      <Home />
+    </Route>
 
-</header>
+  </Routes>
+</Router>  
 
-
-<div className= "container">  
-
-      <div className = "flashcard">
-          <Flashcardlist flashcards = {flashcards}/>
-      </div>
-
-      <button onclick = "nextTerm()">Next Term</button>
-      
-  </div>
-
-
-
-
-</body>
   );
 }
 
 
 
-const getCard = () => {
-  const existingFlashcards = JSON.parse(localStorage.getItem('flashcards')) || [];
-  const testFlashcards = [
-    {
-      id: 1,
-      english: "Hello",
-      chinese: "Ni hao"
-    },
 
-  ];
-
-  return existingFlashcards;
-}
 
 
 
