@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Card from "./Card";
 
 function LocalStorage() {
     //input is the variable, set input is a function that sets the varaible. Default is empty.

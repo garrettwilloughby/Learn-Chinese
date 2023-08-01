@@ -1,7 +1,7 @@
 import './App.css';
 import React, { useState } from 'react'
-import Card from "./Card"
-
+import Card from "./Card";
+import Nav from "./Navbar";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 
@@ -10,14 +10,11 @@ const App = () =>{
 <Router>
 
 {/*content outside switch always shows!*/}
-
+  <Nav />
 {/*all jsx elements must have a parent element*/}
-
+  
   <Routes>
-    <Route path = "/">
-      <Card />
-    </Route>
-
+    <Route path="/" element={<Card />}></Route>
   </Routes>
 </Router>  
 
