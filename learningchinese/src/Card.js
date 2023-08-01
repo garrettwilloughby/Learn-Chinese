@@ -4,7 +4,7 @@ import Flashcardlist from './Flashcardlist';
 import LocalStorage from './Localstorage';
 import Flashcard from './Flashcard';
 
-const home= () => {
+const Card = () => {
 
 const [flashcards, setFlashcards] = useState(getCard());
 const [cardIndex, setCurrentCardIndex] = useState(0);
@@ -43,4 +43,4 @@ const getCard = () => {
   }
   
 
-export default home;
+export default Card;

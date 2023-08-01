@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useState } from 'react'
-import Home from './Home';
+import Card from "./Card"
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
@@ -15,7 +15,7 @@ const App = () =>{
 
   <Routes>
     <Route path = "/">
-      <Home />
+      <Card />
     </Route>
 
   </Routes>
