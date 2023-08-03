@@ -1,5 +1,4 @@
 import React from 'react'
-import Flashcard from './Flashcard'
 import LocalStorage from './Localstorage';
 
 function Flashcardlist() {

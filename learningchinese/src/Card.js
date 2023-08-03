@@ -9,34 +9,57 @@ const Card = () => {
 
 const [flashcards, setFlashcards] = useState(getCard());
 const [cardIndex, setCurrentCardIndex] = useState(0);
+const [flip, flipToggle] = useState(false);
     
 const nextTerm = () => {
     setCurrentCardIndex((prevIndex) => (prevIndex + 1) % flashcards.length);
 } 
+
+const speakTerm = () => {
+    let utterance;
+    if (flip) {
+    utterance = new SpeechSynthesisUtterance(currentFlashcard.english);
+    } else {
+    utterance = new SpeechSynthesisUtterance(currentFlashcard.chinese);
+}
+    speechSynthesis.speak(utterance);
+}
   
 const currentFlashcard = flashcards[cardIndex];
   
 
   
 return (
- 
- 
-<body>
-    <div className= "container">  
-    {flashcards.length > 0 ? (
-    <div className = "flashcard"  key = {currentFlashcard.id}>
-      <Flashcard flashcard = {currentFlashcard}/>
-      <button onClick = {nextTerm} >Next Term</button>
-    </div> ) : (<p>No Flashcards.</p>
 
-      )}        
-
+<div className= "container">  
     
-    </div>
-</body>
+    {flashcards.length > 0 ? (<div  
+    className = {`card ${flip ? 'flip' : ''}`} //*if flip true className = cardflip : false className = card (NEED TO BE BACKTICKS)
+    >
 
-);
-}
+        <div className= 'front'>
+            {currentFlashcard.chinese}
+        </div>
+
+        <div className= 'back'>
+            {currentFlashcard.english}
+        </div>
+            
+        <div className= 'flashcardButtons'>
+            <div className = "button" onClick = {() => flipToggle(!flip)}>flip</div>
+            <div className='button' onClick = {speakTerm}>speak</div>
+            <div className='button'onClick = {nextTerm}>next</div>
+        </div>
+
+            
+
+    </div>
+    ) : (<p>No Flashcards.</p>)}
+    </div>
+    );
+};
+ 
+
 
 
 
