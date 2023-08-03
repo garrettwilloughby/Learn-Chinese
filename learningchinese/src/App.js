@@ -1,7 +1,7 @@
 import './App.css';
-import React, { useState } from 'react'
 import Card from "./Card";
 import Nav from "./Navbar";
+import Local from "./Localstorage"
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 
@@ -15,6 +15,7 @@ const App = () =>{
   
   <Routes>
     <Route path="/" element={<Card />}></Route>
+    <Route path="/Local" element =  {<Local />}></Route>
   </Routes>
 </Router>  
 

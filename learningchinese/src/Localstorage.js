@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Card from "./Card";
+import FlashcardList from "./Flashcardlist";
 
 function LocalStorage() {
     //input is the variable, set input is a function that sets the varaible. Default is empty.
@@ -66,17 +67,21 @@ function LocalStorage() {
             <button onClick = {deleteCard} >Delete Term</button>
             </div>
 
-        </div>
 
-        <div className="clear">
-        <button onClick = {clearCards} >Clear Cards</button>
-        </div>
+            <div className="clear">
+            <button onClick = {clearCards} >Clear Cards</button>
+            </div>
 
-        <div className="undo">
-        <button onClick = {undo} >Undo</button>
+            <div className="undo">
+            <button onClick = {undo} >Undo</button>
+            </div>
         </div>
 
         
+
+        <div className = 'flashcardlist'>
+            <FlashcardList />
+        </div>
 
     </div>
 

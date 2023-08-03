@@ -4,18 +4,21 @@ import Flashcardlist from './Flashcardlist';
 import LocalStorage from './Localstorage';
 import Flashcard from './Flashcard';
 
+
 const Card = () => {
 
 const [flashcards, setFlashcards] = useState(getCard());
 const [cardIndex, setCurrentCardIndex] = useState(0);
+    
+const nextTerm = () => {
+    setCurrentCardIndex((prevIndex) => (prevIndex + 1) % flashcards.length);
+} 
   
 const currentFlashcard = flashcards[cardIndex];
   
-const nextTerm = () => {
-    setCurrentCardIndex((prevIndex) => (prevIndex + 1) % flashcards.length);
-}
+
   
-    return (
+return (
  
  
 <body>
@@ -23,17 +26,19 @@ const nextTerm = () => {
     {flashcards.length > 0 ? (
     <div className = "flashcard"  key = {currentFlashcard.id}>
       <Flashcard flashcard = {currentFlashcard}/>
+      <button onClick = {nextTerm} >Next Term</button>
     </div> ) : (<p>No Flashcards.</p>
 
       )}        
 
-    <button onClick = {nextTerm} >Next Term</button>
     
     </div>
 </body>
 
 );
 }
+
+
 
 
 const getCard = () => {
