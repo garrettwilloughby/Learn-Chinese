@@ -2,7 +2,7 @@ body{
   padding: 0;     /*removing all default padding */
   margin:  0;
   box-sizing: border-box;
-  background-color: antiquewhite;
+  background-color: whitesmoke;
 }
 
 #title{
@@ -64,7 +64,10 @@ body{
 
 .card .back{ 
   transform: rotateY(180deg);
+  
 }
+
+
 
 .flashcardButtons{
   position: absolute;
@@ -72,9 +75,12 @@ body{
   align-items: center;
   justify-content: center;
   margin-top: 60%;
-  margin-left: 40%
+  margin-left: 40%;
+  transform: translate(-50%, -50%);
 }
+
 .button{
+  
   border: solid 1px black; /* remove later */
   margin-left: 10%;
 }

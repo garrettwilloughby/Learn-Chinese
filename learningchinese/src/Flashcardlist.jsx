@@ -1,5 +1,4 @@
 import React from 'react'
-import LocalStorage from './Localstorage';
 
 function Flashcardlist() {
     const flashcards = JSON.parse(localStorage.getItem('flashcards')) || [];
@@ -14,6 +13,6 @@ function Flashcardlist() {
         ))}
       </div>
     );
-  }
+  } 
   
   export default Flashcardlist;
