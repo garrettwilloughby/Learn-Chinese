@@ -10,7 +10,6 @@ const getDueCards = () => {
   localStorage.setItem('duecards', JSON.stringify(dueCards));
   return dueCards;
 };
-      
 
 const [flashcards, setFlashcards] = useState(getDueCards());
 const [cardIndex, setCurrentCardIndex] = useState(0);
@@ -19,7 +18,6 @@ const currentFlashcard = flashcards[cardIndex];
 
 
 //may get rid of this function... unless i can keep track of prev term
-
 
 const speakTerm = () => {
 if(flashcards.length != 0){
@@ -61,11 +59,6 @@ const again = () => {
 const algorithmLogic = (q) => {
     const existingFlashcards = JSON.parse(localStorage.getItem('flashcards')) || [];
 
-    while(cardIndex < 0 || cardIndex >= existingFlashcards.length) {
-        decreaseIntervals();
-        return; // Invalid card index, return without making changes
-    }
-
     if(q > 1){
 
         if (existingFlashcards[cardIndex].repetition == 0){
@@ -93,23 +86,21 @@ const algorithmLogic = (q) => {
     }
 
     localStorage.setItem('flashcards', JSON.stringify(existingFlashcards));
-    setFlashcards(getDueCards());
+    setFlashcards(existingFlashcards);
     nextTerm();
 }
 
 //don't need to sort if we just append the flashcards to a queue anyway
 
-//const sortByInterval = () => {
-//   const existingFlashcards = JSON.parse(localStorage.getItem('duecards')) || [];
-//   existingFlashcards.sort((a, b) => a.interval > b.interval ? 1 : -1)
-//  localStorage.setItem('flashcards', JSON.stringify(existingFlashcards));
-//    setFlashcards(existingFlashcards);
-//}
+// const sortByInterval = () => {
+//     const existingFlashcards = JSON.parse(localStorage.getItem('flashcards')) || [];
+//     existingFlashcards.sort((a, b) => a.interval > b.interval ? 1 : -1)
+//     localStorage.setItem('flashcards', JSON.stringify(existingFlashcards));
+//     setFlashcards(existingFlashcards);
+// }
 
 const nextTerm = () => {
-    if(flashcards.length === 0){
-        return 0
-    }
+ 
     setCurrentCardIndex((prevIndex) => (prevIndex + 1) % flashcards.length);
     
 } 
