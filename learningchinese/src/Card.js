@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 const Card = () => {
 
@@ -11,12 +11,16 @@ const getDueCards = () => {
   return dueCards;
 };
 
+
 const [flashcards, setFlashcards] = useState(getDueCards());
 const [cardIndex, setCurrentCardIndex] = useState(0);
 const [flip, flipToggle] = useState(false);
 const currentFlashcard = flashcards[cardIndex];
 
-
+function refreshPage() {
+    window.location.reload(false);
+  }
+  
 //may get rid of this function... unless i can keep track of prev term
 
 const speakTerm = () => {
@@ -88,7 +92,8 @@ const algorithmLogic = (q) => {
     localStorage.setItem('flashcards', JSON.stringify(existingFlashcards));
     setFlashcards(existingFlashcards);
     nextTerm();
-}
+    
+};
 
 //don't need to sort if we just append the flashcards to a queue anyway
 
@@ -104,7 +109,6 @@ const nextTerm = () => {
     setCurrentCardIndex((prevIndex) => (prevIndex + 1) % flashcards.length);
     
 } 
-
 
 const decreaseIntervals = () => {
     const existingFlashcards = JSON.parse(localStorage.getItem('flashcards')) || [];
