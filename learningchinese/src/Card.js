@@ -1,7 +1,8 @@
 import './App.css';
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 const Card = () => {
+
 
 
 const getDueCards = () => {
@@ -17,12 +18,7 @@ const [cardIndex, setCurrentCardIndex] = useState(0);
 const [flip, flipToggle] = useState(false);
 const currentFlashcard = flashcards[cardIndex];
 
-function refreshPage() {
-    window.location.reload(false);
-  }
   
-//may get rid of this function... unless i can keep track of prev term
-
 const speakTerm = () => {
 if(flashcards.length != 0){
     let utterance;
@@ -44,20 +40,45 @@ if(flashcards.length != 0){
 
 //how to access flashcard object??
 
+
 const easyTerm = () => {
-    algorithmLogic(5);
+    const due = getDueCards();
+    if(due.length > 0){
+        algorithmLogic(5);
+    }
+    else{
+        return;
+    }
 }
 
 const okayTerm = () => {
-    algorithmLogic(2);
+    const due = getDueCards();
+    if(due.length > 0){
+        algorithmLogic(2);
+    }
+    else{
+        return;
+    }
 }
 
 const hardTerm = () => {
-    algorithmLogic(1);
+    const due = getDueCards();
+    if(due.length > 0){
+        algorithmLogic(1);
+    }
+    else{
+        return;
+    }
 }  
 
 const again = () => {
-    algorithmLogic(0);
+    const due = JSON.parse(localStorage.getItem('duecards')) || [];
+    if(due.length > 0){
+        algorithmLogic(0);
+    }
+    else{
+        return;
+    }
 }  
 
 const algorithmLogic = (q) => {
@@ -89,11 +110,13 @@ const algorithmLogic = (q) => {
         existingFlashcards[cardIndex].ease = 1.3;
     }
 
+    
     localStorage.setItem('flashcards', JSON.stringify(existingFlashcards));
-    setFlashcards(existingFlashcards);
+    setFlashcards(getDueCards);
     nextTerm();
     
 };
+
 
 //don't need to sort if we just append the flashcards to a queue anyway
 
@@ -106,18 +129,20 @@ const algorithmLogic = (q) => {
 
 const nextTerm = () => {
  
-    setCurrentCardIndex((prevIndex) => (prevIndex + 1) % flashcards.length);
+    const nextIndex = (cardIndex + 1) % flashcards.length;
+    setCurrentCardIndex(nextIndex);
     
 } 
 
 const decreaseIntervals = () => {
     const existingFlashcards = JSON.parse(localStorage.getItem('flashcards')) || [];
+
     existingFlashcards.map(flashcard => {
-        if(flashcard.interval === 1){
+        if(flashcard.interval <= 2){
             flashcard.interval = 1;
         }
         else{
-        flashcard.interval -= 1;
+        flashcard.interval -= 2;
         }
     })
     
@@ -158,6 +183,8 @@ return (
         <div className='button'onClick = {okayTerm}>okay</div>
         <div className='button'onClick = {hardTerm}>hard</div>
         <div className='button'onClick = {again}>again</div>
+        <div className='button'onClick = {decreaseIntervals}>TEST</div>
+
     </div>
 
 </div>

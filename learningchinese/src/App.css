@@ -13,6 +13,8 @@ body{
 .nav{
   display: flex;
   justify-content: space-between;
+  background-color: rgb(255, 255, 106);
+  border-radius: 20;
   
 }
 
