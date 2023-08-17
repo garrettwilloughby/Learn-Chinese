@@ -3,22 +3,27 @@ import React, { useState } from 'react'
 
 const Card = () => {
 
+const getFlashcards = () => {
+    const existingFlashcards = JSON.parse(localStorage.getItem('flashcards')) || [];
+    return existingFlashcards;
+}
 
-
-const getDueCards = () => {
-  const existingFlashcards = JSON.parse(localStorage.getItem('flashcards')) || [];
-  const dueCards = existingFlashcards.filter(flashcard => flashcard.interval === 1);
-  localStorage.setItem('duecards', JSON.stringify(dueCards));
-  return dueCards;
-};
-
-
-const [flashcards, setFlashcards] = useState(getDueCards());
+const [flashcards, setFlashcards] = useState(getFlashcards());
 const [cardIndex, setCurrentCardIndex] = useState(0);
 const [flip, flipToggle] = useState(false);
 const currentFlashcard = flashcards[cardIndex];
 
-  
+const index = () => {
+    if(cardIndex == 0){
+        setCurrentCardIndex(1);
+    }
+    else{
+        setCurrentCardIndex(0);
+    }
+    return cardIndex
+}
+
+
 const speakTerm = () => {
 if(flashcards.length != 0){
     let utterance;
@@ -42,43 +47,19 @@ if(flashcards.length != 0){
 
 
 const easyTerm = () => {
-    const due = getDueCards();
-    if(due.length > 0){
-        algorithmLogic(5);
-    }
-    else{
-        return;
-    }
+    algorithmLogic(4);
 }
 
 const okayTerm = () => {
-    const due = getDueCards();
-    if(due.length > 0){
-        algorithmLogic(2);
-    }
-    else{
-        return;
-    }
+    algorithmLogic(2);
 }
 
 const hardTerm = () => {
-    const due = getDueCards();
-    if(due.length > 0){
-        algorithmLogic(1);
-    }
-    else{
-        return;
-    }
+    algorithmLogic(1);
 }  
 
 const again = () => {
-    const due = JSON.parse(localStorage.getItem('duecards')) || [];
-    if(due.length > 0){
-        algorithmLogic(0);
-    }
-    else{
-        return;
-    }
+    algorithmLogic(0);
 }  
 
 const algorithmLogic = (q) => {
@@ -110,40 +91,51 @@ const algorithmLogic = (q) => {
         existingFlashcards[cardIndex].ease = 1.3;
     }
 
+
+    //pop and push term so it doesnt get repeated. but do this after array is sorted.
+    
     
     localStorage.setItem('flashcards', JSON.stringify(existingFlashcards));
-    setFlashcards(getDueCards);
-    nextTerm();
-    
+    sortByInterval();
+    decreaseIntervals();
+    index();
+    setFlashcards(getFlashcards());
 };
 
 
 //don't need to sort if we just append the flashcards to a queue anyway
 
-// const sortByInterval = () => {
-//     const existingFlashcards = JSON.parse(localStorage.getItem('flashcards')) || [];
-//     existingFlashcards.sort((a, b) => a.interval > b.interval ? 1 : -1)
-//     localStorage.setItem('flashcards', JSON.stringify(existingFlashcards));
-//     setFlashcards(existingFlashcards);
-// }
+const sortByInterval = () => {
+    console.log('HI')
+    const existingFlashcards = JSON.parse(localStorage.getItem('flashcards')) || [];
+    existingFlashcards.sort((a, b) => a.interval > b.interval ? 1 : -1)
+    localStorage.setItem('flashcards', JSON.stringify(existingFlashcards));
+    setFlashcards(existingFlashcards);
+}
 
-const nextTerm = () => {
+
+
+// const nextTerm = () => {
  
-    const nextIndex = (cardIndex + 1) % flashcards.length;
-    setCurrentCardIndex(nextIndex);
+//     const nextIndex = (cardIndex + 1) % flashcards.length;
+//     setCurrentCardIndex(nextIndex);
     
-} 
+// } 
 
 const decreaseIntervals = () => {
     const existingFlashcards = JSON.parse(localStorage.getItem('flashcards')) || [];
 
     existingFlashcards.map(flashcard => {
-        if(flashcard.interval <= 2){
+        if(flashcard.interval <= 1){
             flashcard.interval = 1;
         }
-        else{
-        flashcard.interval -= 2;
+        else if(flashcard.interval >= 100){
+            flashcard.interval /= 2;
         }
+
+        else{
+            flashcard.interval -= 0.05;
+            }
     })
     
     localStorage.setItem('flashcards', JSON.stringify(existingFlashcards));
@@ -178,7 +170,6 @@ return (
 
     <div className= {`flashcardButtons ${flip ? 'Front' : 'Back'}`}>
         <div className='button' onClick = {speakTerm}>speak</div>
-        <div className='button'onClick = {nextTerm}>next</div>
         <div className='button'onClick = {easyTerm}>easy</div>
         <div className='button'onClick = {okayTerm}>okay</div>
         <div className='button'onClick = {hardTerm}>hard</div>

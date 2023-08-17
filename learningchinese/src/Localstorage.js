@@ -1,25 +1,10 @@
 import React, { useState } from "react";
-import Card from "./Card";
 import FlashcardList from "./Flashcardlist";
-const axios = require('axios');
 
 
-const path = '/translate?api-version=3.0';
-const params = '&to=zh-Hant'; // zh-Hant represents Traditional Chinese
-
-/* This simple app uses the '/translate' resource to translate text from
-one language to another. */
-
-/* This template relies on the request module, a simplified and user friendly
-way to make HTTP requests. */
-
-var key_var = '4b37e2edcb214957b13a5e45fcbe1852';
-const endpoint_var = 'https://api.cognitive.microsofttranslator.com/translate';
-var region_var = 'api-nam.cognitive.microsofttranslator.com';
 
 
-/* If you encounter any issues with the base_url or path, make sure that you are
-using the latest endpoint: https://docs.microsoft.com/azure/cognitive-services/translator/reference/v3-0-translate */
+
 
 
 function LocalStorage() {
@@ -28,17 +13,31 @@ function LocalStorage() {
     const [englishInput, setEnglishInput] = useState('');
     const [chineseInput, setChineseInput] = useState('');
 
+    const translation = async (text) => {
+        try {
+            let apiUrl = `https://api.mymemory.translated.net/get?q=${text}&langpair=en|zh`;
+            const res = await fetch(apiUrl);
+            const data = await res.json();
+            const translatedText = data.responseData.translatedText;
+            return translatedText;
+        } catch (error) {
+            console.error('Error translating:', error);
+            return null; // Return null or some default value in case of error
+        }
+    }
+    
     const addTerm = async () => {
         // Get existing flashcards from local storage (if any)
         const existingFlashcards = JSON.parse(localStorage.getItem('flashcards')) || [];
+        const chineseInput= await translation(englishInput);
         // Create a new flashcard object with the user's inputs.
         // Default values for ease, repetition and interval is 2.5, 0 and 1 respectively.
         const newFlashcard = {
-          english: englishInput,
-          chinese: chineseInput,
-          ease: 2.5,
-          repetition: 0,
-          interval: 1
+            english: englishInput,
+            chinese: chineseInput,
+            ease: 2.5,
+            repetition: 0,
+            interval: 1
         };
     
         // Add the new flashcard to the existing flashcards array
@@ -106,6 +105,11 @@ function LocalStorage() {
             <div className="undo">
             <button onClick = {undo} >Undo</button>
             </div>
+
+            <div className="translate">
+            <button onClick = {translation(englishInput)} >Translate</button>
+            </div>
+
         </div>
 
         
