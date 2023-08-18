@@ -1,5 +1,6 @@
 import './App.css';
 import React, { useState } from 'react'
+import { ReactComponent as Speak } from './speak.svg'
 
 const Card = () => {
 
@@ -14,6 +15,7 @@ const [flip, flipToggle] = useState(false);
 const currentFlashcard = flashcards[cardIndex];
 
 const index = () => {
+    //use random number 1-5 maybe
     if(cardIndex == 0){
         setCurrentCardIndex(1);
     }
@@ -164,21 +166,27 @@ return (
             </div>
 
         </div>
+
+    
             
     ) : (<p>No Flashcards.</p>)}
     </div>
 
-    <div className= {`flashcardButtons ${flip ? 'Front' : 'Back'}`}>
-        <div className='button' onClick = {speakTerm}>speak</div>
-        <div className='button'onClick = {easyTerm}>easy</div>
-        <div className='button'onClick = {okayTerm}>okay</div>
-        <div className='button'onClick = {hardTerm}>hard</div>
-        <div className='button'onClick = {again}>again</div>
-        <div className='button'onClick = {decreaseIntervals}>TEST</div>
+        <div className = 'speakButton'>
+            <div onClick={speakTerm}>
+                <Speak />
+            </div>
+        </div>
+
+        <div className= {`flashcardButtons ${flip ? 'Front' : 'Back'}`}>
+            <div className='buttonEasy'onClick = {easyTerm}>easy</div>
+            <div className='buttonOkay'onClick = {okayTerm}>okay</div>
+            <div className='buttonHard'onClick = {hardTerm}>hard</div>
+            <div className='buttonAgain'onClick = {again}>again</div>
+        </div>
 
     </div>
 
-</div>
 
     );
 };

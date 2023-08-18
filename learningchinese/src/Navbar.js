@@ -6,10 +6,11 @@ const nav = () => {
     return (  
 
     <header className='nav'>
-        <h1 class = "title">學習中文!!</h1>
+        <h1 className = "title">學習中文!!</h1>
+
         <div>
-        <Link to = "/">Flashcards</Link>
-        <Link to = "/Local">Edit</Link>
+        <Link className = 'navbutton' to = "/">Flashcards</Link>
+        <Link className = 'navbutton' to = "/Local">Edit</Link>
         </div>
     </header>
 );

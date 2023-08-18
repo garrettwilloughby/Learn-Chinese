@@ -1,33 +1,44 @@
+
+/* all */
+
 body{
   padding: 0;     /*removing all default padding */
   margin:  0;
   box-sizing: border-box;
-  background-color: whitesmoke;
+  background-color: rgb(255, 255, 255);
 }
 
-#title{
-  font-size: 10px;
+
+.title{
+  font-size: 30px;
+  color: black;
+  margin-left: 1%;
   
 }
 
 .nav{
   display: flex;
   justify-content: space-between;
-  background-color: rgb(255, 255, 106);
+  background-color: whitesmoke;
   border-radius: 20;
   
 }
 
+.navbutton{
+  border: solid 1px black; /* remove later */
+}
+
+
+/* card.js */
 
 .container{
   height: 70vh; /* vh is viewport */
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: solid 1px black; /* remove later */
-  
+  border: solid 1px rgb(204, 204, 204); /* remove later */
 }
-
 
 .card{
   display: flex;
@@ -69,23 +80,66 @@ body{
   
 }
 
-
-
 .flashcardButtons{
-  position: absolute;
+  margin-top: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 60%;
-  margin-left: 40%;
-  transform: translate(-50%, -50%);
+}
+
+.speakButton{
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
 }
 
 .button{
-  
   border: solid 1px black; /* remove later */
-  margin-left: 10%;
+  margin-left: 5%;
+  cursor: pointer;
 }
+
+/*flashcard buttons*/
+
+.buttonEasy,
+.buttonOkay,
+.buttonHard,
+.buttonAgain{
+  border: solid 1px grey; /* remove later */
+  margin-left: 5%;
+  cursor: pointer;
+  transform: perspective(1000px) translateY(var(--pop, 0));
+  text-align: center;
+  height: auto;
+  width: auto;
+  border-radius: 10px;
+}
+
+
+.buttonEasy:hover{
+  background-color: rgb(112, 248, 112);
+  --pop: -5px;
+}
+
+.buttonOkay:hover{
+  background-color: rgb(255, 255, 135);
+  --pop: -5px;
+}
+
+.buttonHard:hover{
+  background-color: rgb(255, 129, 129);
+  --pop: -5px;
+}
+
+.buttonAgain:hover{
+  background-color: rgb(255, 129, 129);
+  --pop: -5px;
+}
+
+
 
 /* Editing page */
 
@@ -93,6 +147,8 @@ body{
   display: grid;
 }
 
+
+/* flashcard list */
 .listcard{
   display: inline-block;
   justify-content: center;
