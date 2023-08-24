@@ -24,8 +24,14 @@ body{
   
 }
 
+.navbuttons{
+  margin-right: 1%;
+  margin-top: 2.5%;
+}
+
 .navbutton{
   border: solid 1px black; /* remove later */
+  border-radius: 25px;
 }
 
 
@@ -54,6 +60,8 @@ body{
   width: 250px;
   cursor: pointer;
   transform: perspective(1000px) rotateY(var(--rotate-y, 0)) translateY(var(--pop, 0));
+  font-size: 25px;
+  line-height: 125px;
 }
 
 .card:hover{
@@ -113,24 +121,25 @@ body{
   cursor: pointer;
   transform: perspective(1000px) translateY(var(--pop, 0));
   text-align: center;
-  height: auto;
-  width: auto;
+  height: 30px;
+  width: 75px;
   border-radius: 10px;
+  line-height: 25px;
 }
 
 
 .buttonEasy:hover{
-  background-color: rgb(112, 248, 112);
+  background-color: rgb(88, 199, 255);
   --pop: -5px;
 }
 
 .buttonOkay:hover{
-  background-color: rgb(255, 255, 135);
+  background-color: rgb(150, 255, 147);
   --pop: -5px;
 }
 
 .buttonHard:hover{
-  background-color: rgb(255, 129, 129);
+  background-color: rgb(255, 253, 129);
   --pop: -5px;
 }
 

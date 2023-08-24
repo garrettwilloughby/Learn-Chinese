@@ -10,18 +10,14 @@ const getFlashcards = () => {
 }
 
 const [flashcards, setFlashcards] = useState(getFlashcards());
-const [cardIndex, setCurrentCardIndex] = useState(0);
+var [cardIndex, setCurrentCardIndex] = useState(0);
 const [flip, flipToggle] = useState(false);
 const currentFlashcard = flashcards[cardIndex];
 
 const index = () => {
-    //use random number 1-5 maybe
-    if(cardIndex == 0){
-        setCurrentCardIndex(1);
-    }
-    else{
-        setCurrentCardIndex(0);
-    }
+    //use random number 0-3
+    cardIndex = Math.floor((Math.random() * 3) + 1);
+    setCurrentCardIndex(cardIndex);
     return cardIndex
 }
 
@@ -102,6 +98,7 @@ const algorithmLogic = (q) => {
     decreaseIntervals();
     index();
     setFlashcards(getFlashcards());
+    flipToggle(false);
 };
 
 

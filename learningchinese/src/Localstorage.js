@@ -20,7 +20,7 @@ function LocalStorage() {
             const data = await res.json();
             const translatedText = data.responseData.translatedText;
             console.log(data);
-            if(translatedText !== null){
+            if(translatedText !== "NO QUERY SPECIFIED. EXAMPLE REQUEST: GET?Q=HELLO&LANGPAIR=EN|IT"){
                 await setChineseInput(translatedText);
                 return translatedText;
             }

@@ -8,7 +8,7 @@ const nav = () => {
     <header className='nav'>
         <h1 className = "title">學習中文!!</h1>
 
-        <div>
+        <div className='navbuttons'>
         <Link className = 'navbutton' to = "/">Flashcards</Link>
         <Link className = 'navbutton' to = "/Local">Edit</Link>
         </div>
