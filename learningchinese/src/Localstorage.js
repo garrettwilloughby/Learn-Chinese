@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import FlashcardList from "./Flashcardlist";
+import Translate from './translate.png'
 
 
 
@@ -94,29 +95,19 @@ function LocalStorage() {
 
     return (
     <div className = "input">
+
+        
         <div className = "new">
-            <label for="term">English</label>
-            <input type="text" autocomplete="off" id = "english" class = "english" value = {englishInput} onChange={(e) => setEnglishInput(e.target.value)}></input>
-            <label for = "term">Chinese</label>
-            <input type="text" autocomplete="off" id = "chinese" class = "chinese" value = {chineseInput} onChange={(e) => setChineseInput(e.target.value)}></input>
-            <button onClick = {addTerm} >Add New Term</button>
+            <input type="text" className = "term" autocomplete="off" id = "english" placeholder = "English Term" class = "english" value = {englishInput} onChange={(e) => setEnglishInput(e.target.value)}></input>
+            <input type="text" className = "term" autocomplete="off" id = "chinese" placeholder = "Chinese Term" class = "chinese" value = {chineseInput} onChange={(e) => setChineseInput(e.target.value)}></input>
 
-            <div className="delete">
-            <button onClick = {deleteCard} >Delete Term</button>
-            </div>
-
-
-            <div className="clear">
-            <button onClick = {clearCards} >Clear Cards</button>
-            </div>
-
-            <div className="undo">
-            <button onClick = {undo} >Undo</button>
-            </div>
-
-            <div className="translate">
-            <button onClick = {() => translation(englishInput)} >Translate</button>
-            </div>
+        <div className="editButtons">
+            <div className = "add" onClick = {addTerm} >+</div>
+            <div className = "delete" onClick = {deleteCard} >-</div>
+            <div className="clear" onClick = {clearCards} >⃠</div>
+            <div className="undo" onClick = {undo} >⎌</div>
+            <div className="translate" onClick = {() => translation(englishInput)}>Translate</div>
+        </div>
 
         </div>
 

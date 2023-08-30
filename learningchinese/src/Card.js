@@ -16,9 +16,16 @@ const currentFlashcard = flashcards[cardIndex];
 
 const index = () => {
     //use random number 0-3
+    const existingFlashcards = getFlashcards();
+    if(existingFlashcards.length >= 5){
     cardIndex = Math.floor((Math.random() * 3) + 1);
     setCurrentCardIndex(cardIndex);
     return cardIndex
+    }
+    else{
+        setCurrentCardIndex(0);
+        return 0;
+    }
 }
 
 
@@ -105,7 +112,6 @@ const algorithmLogic = (q) => {
 //don't need to sort if we just append the flashcards to a queue anyway
 
 const sortByInterval = () => {
-    console.log('HI')
     const existingFlashcards = JSON.parse(localStorage.getItem('flashcards')) || [];
     existingFlashcards.sort((a, b) => a.interval > b.interval ? 1 : -1)
     localStorage.setItem('flashcards', JSON.stringify(existingFlashcards));

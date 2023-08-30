@@ -13,7 +13,6 @@ body{
   font-size: 30px;
   color: black;
   margin-left: 1%;
-  
 }
 
 .nav{
@@ -130,22 +129,22 @@ body{
 
 .buttonEasy:hover{
   background-color: rgb(88, 199, 255);
-  --pop: -5px;
+  --pop: 3px;
 }
 
 .buttonOkay:hover{
   background-color: rgb(150, 255, 147);
-  --pop: -5px;
+  --pop: 3px;
 }
 
 .buttonHard:hover{
   background-color: rgb(255, 253, 129);
-  --pop: -5px;
+  --pop: 3px;
 }
 
 .buttonAgain:hover{
   background-color: rgb(255, 129, 129);
-  --pop: -5px;
+  --pop: 3px;
 }
 
 
@@ -153,47 +152,73 @@ body{
 /* Editing page */
 
 .input{
+  
   display: grid;
+  width: 100%;
+  justify-content: center;
+  border: solid 1px rgb(204, 204, 204); /* remove later */
+  
+  
 }
 
 
 /* flashcard list */
 .listcard{
-  display: inline-block;
   justify-content: center;
   text-align: center;
   position: relative;
   border-radius: .25rem;
-  transform-style: preserve-3d;  /* Things in front now in back, viseversa */
-  transition: 150ms; /* Animation for card */
   box-shadow: 0 0 5px 2px rgba(0 , 0 , 0, 0.3);
   background-color: white;
-  height: 180px;
-  width: 250px;
+  height: 270px;
+  width: 375px;
   cursor: pointer;
-  transform: perspective(1000px) rotateY(var(--rotate-y, 0)) translateY(var(--pop, 0));
 }
 
-.listcard:hover{
+.listcard:hover,
+.new:hover{
   box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.5);
 }
 
 
-.flashcardlist {
+.flashcardlist{
 
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  display: inline;
+  width: 100%;
+  display: inline-flex;
+  margin-bottom: 5%;
  
 }
 
 .new{
   display: flex;
-  align-items: center;
-  justify-content: center;
-  border: solid 1px black; /* remove later */
-  height: 20vh;
+  border-radius: .25rem;
+  box-shadow: 0 0 5px 2px rgba(0 , 0 , 0, 0.3);
+  background-color: white;
+  height: 270px;
+  width: 375px;
+  cursor: pointer;
+}
 
+.editButtons{
+  display: flex;
+}
+
+.translate{
+  position: relative;
+}
+
+.add{
+  height: 10%;
+
+}
+
+
+input {
+  width: 150px; /* Set the desired width */
+  height: 30px; /* Set the desired height */
+  border-bottom: solid 1px rgb(204, 204, 204); /* remove later */
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  
 }
