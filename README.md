@@ -11,3 +11,7 @@ CREATE USER myuser WITH PASSWORD 'password';
 
 brew services start postgresql
 brew services restart postgresql@14
+
+When making changes to the database:
+python manage.py makemigrations
+python manage.py migrate
