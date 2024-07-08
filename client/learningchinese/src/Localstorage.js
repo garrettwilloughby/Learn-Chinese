@@ -3,11 +3,6 @@ import FlashcardList from "./Flashcardlist";
 import Translate from './translate.png'
 
 
-
-
-
-
-
 function LocalStorage() {
     
     //input is the variable, set input is a function that sets the varaible. Default is empty.
@@ -41,19 +36,38 @@ function LocalStorage() {
         const chineseInput= await translation(englishInput);
         // Create a new flashcard object with the user's inputs.
         // Default values for ease, repetition and interval is 2.5, 0 and 1 respectively.
+        // const newFlashcard = {
+        //     english: ,
+        //     chinese: ,
+        //     ease: 2.5,
+        //     repetition: 0,
+        //     interval: 1
+        // };
+
         const newFlashcard = {
-            english: englishInput,
             chinese: chineseInput,
-            ease: 2.5,
-            repetition: 0,
-            interval: 1
-        };
+            translation: englishInput,
+            pinyin: "Example Pinyin"
+          };
     
         // Add the new flashcard to the existing flashcards array
         const updatedFlashcards = [...existingFlashcards, newFlashcard];
     
         // Save the updated flashcards array to local storage
         localStorage.setItem('flashcards', JSON.stringify(updatedFlashcards));
+
+        
+          
+          fetch('http://localhost:8000/Card/Create', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newFlashcard)
+          })
+          .then(response => response.json())
+          .then(data => console.log(data))
+          .catch(error => console.error('Error:', error));
     
         // Clear the input fields after adding the flashcard
         setEnglishInput('');
@@ -90,8 +104,6 @@ function LocalStorage() {
         setChineseInput('');
         window.location.reload();
     }
-    
-
 
     return (
     <div className = "input">
@@ -110,8 +122,6 @@ function LocalStorage() {
         </div>
 
         </div>
-
-        
 
         <div className = 'flashcardlist'>
             <FlashcardList />

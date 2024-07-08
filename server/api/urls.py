@@ -4,7 +4,7 @@ from .views import CardView, CreateCardView
 
 
 urlpatterns = [
-    path('Card', CardView.as_view()),
-    path('Card/Create', CreateCardView.as_view())
+    path('Card/', CardView, name='Card'),
+    path('Card/Create', CreateCardView, name='CreateCard'),
 
 ]

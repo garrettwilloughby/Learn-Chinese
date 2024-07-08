@@ -3,40 +3,46 @@ from django.http import HttpResponse
 from rest_framework import generics, status
 from .serializers import CardSerializer, CreateCardSerializer
 from .models import Card
-from rest_framework.views import APIView
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 # Create your views here.
 
 
-class CardView(generics.CreateAPIView):
-    queryset = Card.objects.all()
-    serializer_class = CardSerializer
+@api_view(['GET'])
+def CardView(request):
+    try:
+        queryset = Card.objects.all()
+        serializer_class = CardSerializer(queryset, many=True)
+        return Response(serializer_class.data)
+    except Exception as e:
+        return Response({'error': str(e)}, status=500)
 
 
-class CreateCardView(APIView):
-    serializer_class = CreateCardSerializer
-    # can override any method with APIView
+@api_view(['POST'])
+def CreateCardView(request):
+    serializer = CreateCardSerializer(data=request.data)
+    if serializer.is_valid():
+        # Extract validated data from serializer
+        chinese = serializer.validated_data.get('chinese')
+        translation = serializer.validated_data.get('translation')
+        pinyin = serializer.validated_data.get('pinyin')
 
-    def post(self, request, format=None):
-        serializer = self.serializer_class(data=request.data)
-        if serializer.is_valid():
-            chinese = serializer.data.get('chinese')
-            translation = serializer.data.get('translation')
-            pinyin = serializer.data.get('pinyin')
-            queryset = Card.objects.filter(chinese=chinese)
-            if queryset.exists():
-                card = queryset[0]
-                card.translation = translation
-                card.pinyin = pinyin
-                card.save(update_fields=['translation', 'pinyin'])
-            else:
-                card = Card(chinese=chinese,
-                            translation=translation, pinyin=pinyin)
-                card.save()
+        # Check if the card already exists
+        card, created = Card.objects.get_or_create(
+            chinese=chinese, defaults={'translation': translation, 'pinyin': pinyin})
 
-            # should return json
-            return Response(CardSerializer(card).data, status=status.HTTP_200_OK)
+        # If the card exists, update its fields
+        if not created:
+            card.translation = translation
+            card.pinyin = pinyin
+            card.save(update_fields=['translation', 'pinyin'])
+
+        # Return serialized data of the card
+        return Response(CardSerializer(card).data, status=status.HTTP_200_OK)
+
+    # If serializer is not valid, return errors
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 def main(request):
