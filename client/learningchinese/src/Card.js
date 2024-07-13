@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react';
 import { ReactComponent as Speak } from './speak.svg'
 
 const Card = () => {
