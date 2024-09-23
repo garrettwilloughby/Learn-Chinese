@@ -6,5 +6,6 @@ from .views import CardView, CreateCardView
 urlpatterns = [
     path('Card/', CardView, name='Card'),
     path('Card/Create', CreateCardView, name='CreateCard'),
+    path('Card/DeleteAll', CreateCardView, name='DeleteAllCards'),
 
 ]

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import useApi from './components/apiUtil';
 import FlashcardList from "./Flashcardlist";
 import Translate from './translate.png'
 
@@ -47,7 +48,10 @@ function LocalStorage() {
         const newFlashcard = {
             chinese: chineseInput,
             translation: englishInput,
-            pinyin: "Example Pinyin"
+            pinyin: "Example Pinyin",
+            ease: 2.5,
+            repetition: 0,
+            interval: 1
           };
     
         // Add the new flashcard to the existing flashcards array
@@ -72,15 +76,32 @@ function LocalStorage() {
         // Clear the input fields after adding the flashcard
         setEnglishInput('');
         setChineseInput('');
-
+        console.log("added card:", newFlashcard);
         window.location.reload();
-
       };
 
-    const clearCards = () =>{
+    const clearCards =  async () =>{
+
+        if (window.confirm('Are you sure you want to delete all flashcards?')) {
+            try {
+                const response = await fetch('http://localhost:8000/Card/DeleteAll', {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
         localStorage.clear();
         window.location.reload();
+            
+    }catch(error){
+        console.error('Error:', error);
     }
+    }
+    }   
 
     const undo = () => {
         const existingFlashcards = JSON.parse(localStorage.getItem('flashcards')) || [];
