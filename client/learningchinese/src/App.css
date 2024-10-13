@@ -1,223 +1,227 @@
+/* General Styles */
 
-/* all */
-
-body{
-  padding: 0;     /*removing all default padding */
-  margin:  0;
+body {
+  padding: 0;
+  margin: 0;
   box-sizing: border-box;
-  background-color: rgb(255, 255, 255);
+  background-color: #f4f4f9;  /* Light background for modern feel */
+  font-family: 'Roboto', sans-serif;  /* Clean modern font */
 }
 
-.title{
-  font-size: 30px;
-  color: black;
-  margin-left: 1%;
+.title {
+  font-size: 32px;
+  color: #333;
+  margin-left: 2%;
+  font-weight: 600;
 }
 
-.nav{
+.nav {
   display: flex;
   justify-content: space-between;
-  background-color: whitesmoke;
-  border-radius: 20;
-  
+  align-items: center; /* Vertically center items */
+  background-color: white;
+  padding: 10px 20px; /* Slightly smaller padding */
+  box-shadow: none; /* Remove shadow */
+  border-bottom: 1px solid #e0e0e0; /* Subtle bottom border */
 }
 
-.navbuttons{
-  margin-right: 1%;
-  margin-top: 2.5%;
+.navbuttons {
+  display: flex;
+  gap: 15px; /* Space between buttons */
 }
 
-.navbutton{
-  border: solid 1px black; /* remove later */
-  border-radius: 25px;
+.navbutton {
+  border: none;
+  background-color: transparent; /* No background */
+  color: #333; /* Subtle dark color */
+  padding: 5px 15px; /* Minimal padding */
+  font-size: 15px;
+  cursor: pointer;
+  transition: color 0.3s ease;
 }
 
+.navbutton:hover {
+  color: #4a90e2; /* Light blue on hover */
+  background-color: #f4f4f9; /* Add a subtle background on hover */
+  border-radius: 10px; /* Slight rounding on hover */
+}
 
-/* card.js */
+/* Card Styles */
 
-.container{
-  height: 70vh; /* vh is viewport */
+.container {
+  min-height: 70vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: solid 1px rgb(204, 204, 204); /* remove later */
+  border: none;
 }
 
-.card{
+.card {
   display: flex;
   justify-content: center;
+  align-items: center;
   text-align: center;
   position: relative;
-  border-radius: .25rem;
-  transform-style: preserve-3d;  /* Things in front now in back, viseversa */
-  transition: 150ms; /* Animation for card */
-  box-shadow: 0 0 5px 2px rgba(0 , 0 , 0, 0.3);
-  background-color: white;
-  height: 180px;
-  width: 250px;
+  border-radius: 10px;
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);  /* Softer shadow */
+  background-color: #fff;
+  height: 200px;
+  width: 300px;
   cursor: pointer;
   transform: perspective(1000px) rotateY(var(--rotate-y, 0)) translateY(var(--pop, 0));
-  font-size: 25px;
-  line-height: 125px;
+  font-size: 24px;
+  line-height: 180px;
 }
 
-.card:hover{
+.card:hover {
   --pop: -10px;
-  box-shadow: 0 0 5px 2px rgba(0 , 0 , 0, 0.5);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);  /* Subtle hover shadow */
 }
 
-.card.flip{
+.card.flip {
   --rotate-y: 180deg;
 }
 
-
-/* review this syntax later. is front, back nested?*/
-.card .front,
-.card .back{ 
+.card .front, .card .back {
   position: absolute;
-  padding: 1rem;
+  padding: 20px;
   backface-visibility: hidden;
-
 }
 
-.card .back{ 
+.card .back {
   transform: rotateY(180deg);
-  
 }
 
-.flashcardButtons{
+.flashcardButtons {
   margin-top: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.speakButton{
+.speakButton {
   margin-top: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-
 }
 
-.button{
-  border: solid 1px black; /* remove later */
-  margin-left: 5%;
-  cursor: pointer;
-}
-
-/*flashcard buttons*/
-
-.buttonEasy,
-.buttonOkay,
-.buttonHard,
-.buttonAgain{
-  border: solid 1px grey; /* remove later */
-  margin-left: 5%;
-  cursor: pointer;
-  transform: perspective(1000px) translateY(var(--pop, 0));
-  text-align: center;
-  height: 30px;
-  width: 75px;
+.button {
+  border: none;
+  background-color: #4a90e2;
+  color: white;
+  padding: 10px 20px;
   border-radius: 10px;
-  line-height: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-
-.buttonEasy:hover{
-  background-color: rgb(88, 199, 255);
-  --pop: 3px;
+.button:hover {
+  background-color: #357ABD;
 }
 
-.buttonOkay:hover{
-  background-color: rgb(150, 255, 147);
-  --pop: 3px;
+/* Flashcard Buttons */
+
+.buttonEasy, .buttonOkay, .buttonHard, .buttonAgain {
+  border: none;
+  padding: 8px 16px;  /* Smaller padding */
+  cursor: pointer;
+  text-align: center;
+  height: 30px;  /* Smaller height */
+  width: 70px;   /* Smaller width */
+  border-radius: 8px;  /* Adjusted corner radius */
+  font-size: 14px;  /* Smaller font size */
+  font-weight: 500;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+  margin: 0 10px;  /* Space between buttons */
 }
 
-.buttonHard:hover{
-  background-color: rgb(255, 253, 129);
-  --pop: 3px;
+.buttonEasy {
+  background-color: #56c7ff;
 }
 
-.buttonAgain:hover{
-  background-color: rgb(255, 129, 129);
-  --pop: 3px;
+.buttonOkay {
+  background-color: #96ff93;
 }
 
+.buttonHard {
+  background-color: #ffff89;
+}
 
+.buttonAgain {
+  background-color: #ff8989;
+}
 
-/* Editing page */
+.buttonEasy:hover, .buttonOkay:hover, .buttonHard:hover, .buttonAgain:hover {
+  transform: translateY(-3px);
+}
 
-.input{
-  
+/* Editing Page */
+
+.input {
   display: grid;
   width: 100%;
   justify-content: center;
-  border: solid 1px rgb(204, 204, 204); /* remove later */
-  
-  
+  border: none;
+  padding: 15px;
+  border-bottom: solid 1px #ccc;
 }
 
+/* Flashcard List */
 
-/* flashcard list */
-.listcard{
+.listcard {
   justify-content: center;
   text-align: center;
   position: relative;
-  border-radius: .25rem;
-  box-shadow: 0 0 5px 2px rgba(0 , 0 , 0, 0.3);
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   background-color: white;
   height: 270px;
   width: 375px;
   cursor: pointer;
+  transition: box-shadow 0.3s ease;
 }
 
-.listcard:hover,
-.new:hover{
-  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.5);
+.listcard:hover, .new:hover {
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
 
-
-.flashcardlist{
-
+.flashcardlist {
   width: 100%;
-  display: inline-flex;
+  display: flex;
   margin-bottom: 5%;
- 
 }
 
-.new{
+.new {
   display: flex;
-  border-radius: .25rem;
-  box-shadow: 0 0 5px 2px rgba(0 , 0 , 0, 0.3);
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   background-color: white;
   height: 270px;
   width: 375px;
   cursor: pointer;
 }
 
-.editButtons{
+.editButtons {
   display: flex;
 }
 
-.translate{
+.translate {
   position: relative;
 }
 
-.add{
+.add {
   height: 10%;
-
 }
 
-
 input {
-  width: 150px; /* Set the desired width */
-  height: 30px; /* Set the desired height */
-  border-bottom: solid 1px rgb(204, 204, 204); /* remove later */
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  
+  width: 200px;
+  height: 35px;
+  padding: 5px;
+  border: none;
+  border-bottom: solid 1px #ccc;
 }

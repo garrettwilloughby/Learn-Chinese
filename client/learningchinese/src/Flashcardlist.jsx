@@ -1,33 +1,13 @@
 import React, { useState, useEffect } from 'react';
-
-async function getFlashCards() {
-  try {
-    const response = await fetch('http://localhost:8000/Card/', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
-
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error(error);
-    return [];
-  }
-}
+import { getFlashcards } from "./util/api";
 
 const Flashcardlist = () => {
-  const [flashcards, setFlashcards] = useState(JSON.parse(localStorage.getItem('flashcards')) || []);
+  const [flashcards, setFlashcards] = useState(getFlashcards() || []);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
-      const fetchedFlashcards = await getFlashCards();
+      const fetchedFlashcards = await getFlashcards();
       setFlashcards(fetchedFlashcards);
       setLoading(false);
     };
