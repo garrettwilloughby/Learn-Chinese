@@ -1,7 +1,7 @@
 import './App.css';
 import Card from "./Card";
 import Nav from "./Navbar";
-import Local from "./Localstorage"
+import Logic from "./Algorithm"
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 
@@ -15,7 +15,7 @@ const App = () =>{
   
   <Routes>
     <Route path="/" element={<Card />}></Route>
-    <Route path="/Local" element =  {<Local />}></Route>
+    <Route path="/Local" element =  {<Logic />}></Route>
   </Routes>
 </Router>  
 

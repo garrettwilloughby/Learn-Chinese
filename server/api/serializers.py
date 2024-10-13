@@ -8,7 +8,12 @@ class CardSerializer(serializers.ModelSerializer):
         fields = ('id', 'chinese', 'translation', 'pinyin',
                   'ease', 'repetition', 'interval', 'created_on')
 
-# handles the post req
+
+class UpdateCardSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Card
+        fields = ('chinese', 'translation', 'pinyin',
+                  'ease', 'repetition', 'interval')
 
 
 class CreateCardSerializer(serializers.ModelSerializer):
