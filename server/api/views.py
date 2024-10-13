@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from rest_framework import generics, status
-from .serializers import CardSerializer, CreateCardSerializer
+from .serializers import CardSerializer, CreateCardSerializer, UpdateCardSerializer
 from .models import Card
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -18,6 +18,32 @@ def CardView(request):
         return Response(serializer_class.data)
     except Exception as e:
         return Response({'error': str(e)}, status=500)
+
+
+@api_view(['PUT'])
+def UpdateCardView(request):
+    # Extract the 'english' field from the request data
+    id = request.data.get('id')
+
+    if not id:
+        return Response({'error': 'English term is required'}, status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        # Fetch the card using the 'english' field
+        card = Card.objects.get(id=id)
+    except Card.DoesNotExist:
+        return Response({'error': 'Card not found'}, status=status.HTTP_404_NOT_FOUND)
+
+    # Pass the existing card instance and the new data to the serializer
+    serializer = UpdateCardSerializer(card, data=request.data)
+
+    # Validate and update the card if the data is valid
+    if serializer.is_valid():
+        serializer.save()  # This will update the existing card
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    # Return validation errors if the data is invalid
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['POST'])
